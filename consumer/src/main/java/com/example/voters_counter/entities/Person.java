@@ -1,14 +1,9 @@
 package com.example.voters_counter.entities;
 
 import jakarta.persistence.*;
-//import jakarta.persistence.GeneratedValue;
-//import jakarta.persistence.GenerationType;
 import lombok.*;
-//import org.springframework.data.annotation.Id;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-//import org.springframework.data.relational.core.mapping.Column;
-//import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 
