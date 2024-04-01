@@ -8,7 +8,7 @@ import lombok.*;
 @Getter
 @Builder
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Votes {
 
@@ -18,8 +18,4 @@ public class Votes {
     @JsonProperty("votes")
     private Long votes;
 
-    public Votes(String family, Long votes) {
-        this.family = family.toUpperCase();
-        this.votes = votes;
-    }
 }
