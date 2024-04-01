@@ -4,36 +4,39 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity
 @Builder
-@Table(name = "PERSONS")
+@Table("PERSONS")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 public class Person {
 
     @Id
-    @Column(name = "PERSON_ID")
+    @Column("PERSON_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "PERSON_NAME")
+    @Column("PERSON_NAME")
     private String name;
-    @Column(name = "FAMILY")
+    @Column("FAMILY")
     private String family;
 
-    @Column(name = "VOTES")
+    @Column("VOTES")
     private Long votes;
 
-    @Column(name = "CREATED", updatable = false, nullable = false)
+    @Column("CREATED")
     @CreationTimestamp
     private LocalDateTime created;
 
-    @Column(name = "UPDATED", nullable = false)
+    @Version
+    @Column( "UPDATED")
     @UpdateTimestamp
     private LocalDateTime updated;
 
