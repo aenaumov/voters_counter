@@ -1,9 +1,8 @@
 package com.example.voters_counter.entities;
 
-import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.annotation.Id;
@@ -20,7 +19,6 @@ public class Person {
 
     @Id
     @Column("PERSON_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column("PERSON_NAME")
@@ -32,12 +30,11 @@ public class Person {
     private Long votes;
 
     @Column("CREATED")
-    @CreationTimestamp
+    @CreatedDate
     private LocalDateTime created;
 
     @Version
-    @Column( "UPDATED")
-    @UpdateTimestamp
-    private LocalDateTime updated;
+    @Column("VERSION")
+    private Long version;
 
 }
