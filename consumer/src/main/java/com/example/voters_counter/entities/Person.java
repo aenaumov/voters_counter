@@ -2,7 +2,6 @@ package com.example.voters_counter.entities;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Version;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.annotation.Id;
@@ -32,9 +31,5 @@ public class Person {
     @Column("CREATED")
     @CreatedDate
     private LocalDateTime created;
-
-    @Version
-    @Column("VERSION")
-    private Long version;
 
 }
