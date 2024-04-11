@@ -6,6 +6,8 @@ import com.example.voters_counter.repository.UserReactiveRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
@@ -17,6 +19,7 @@ public class PersonService {
     @Autowired
     private UserReactiveRepository userReactiveRepository;
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public Mono<Person> addVotes(Votes votes) {
 
         final String family = votes.getFamily();
@@ -27,9 +30,8 @@ public class PersonService {
                 .switchIfEmpty(Mono.error(new RuntimeException("Person '" + family + "' doesn't exist")))
                 .flatMap(person -> {
                     person.setVotes(person.getVotes() + vote);
-                    log.info("add {} votes to {}", vote, family);
-                     return userReactiveRepository.save(person);
-                })
-                ;
+                    log.info("Try add {} votes to {}", vote, family);
+                    return userReactiveRepository.save(person);
+                }) ;
     }
 }
