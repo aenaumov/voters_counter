@@ -97,19 +97,19 @@ services:
 #  kafka-lag-exporter:
 #    image: seglo/kafka-lag-exporter
 #    networks:
-#      - jpoint_network
+#      - project_network
 #    hostname: kafka-lag-exporter
 #    container_name: kafka-lag-exporter
 #    ports:
 #      - 8000:8000
 #    volumes:
-#      - C:\Docker\jpoint\lag-exporter\application.conf:/opt/docker/conf/application.conf
-#      - C:\Docker\jpoint\lag-exporter\logback.xml:/opt/docker/conf/logback.xml
+#      - C:\Docker\project\lag-exporter\application.conf:/opt/docker/conf/application.conf
+#      - C:\Docker\project\lag-exporter\logback.xml:/opt/docker/conf/logback.xml
 #
 #  cadvisor:
 #    image: gcr.io/cadvisor/cadvisor:latest
 #    networks:
-#      - jpoint_network
+#      - project_network
 #    hostname: cadvisor
 #    container_name: cadvisor
 #    volumes:
@@ -122,13 +122,13 @@ services:
 #  prometheus:
 #    image: docker.io/prom/prometheus:latest
 #    networks:
-#      - jpoint_network
+#      - project_network
 #    hostname: prometheus
 #    container_name: prometheus
 #    ports:
 #      - "9090:9090"
 #    volumes:
-#      - C:\Docker\jpoint\prometheus\prometheus.yml:/etc/prometheus/prometheus.yml
+#      - C:\Docker\project\prometheus\prometheus.yml:/etc/prometheus/prometheus.yml
 
   grafana:
 #    image: grafana/grafana:6.7.2
