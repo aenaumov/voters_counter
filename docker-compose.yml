@@ -2,7 +2,6 @@ version: '3.9'
 services:
 
   kafka:
-#    image: confluentinc/cp-kafka:7.4.4
     image: confluentinc/cp-kafka:latest
     hostname: kafka
     container_name: kafka
@@ -88,26 +87,26 @@ services:
 #    volumes:
 #      - C:\Docker\project\prometheus\prometheus.yml:/etc/prometheus/prometheus.yml
 
-  grafana:
-#    image: grafana/grafana:6.7.2
-    image: grafana/grafana:latest
-    container_name: grafana
-    volumes:
-      - 'grafana_data:/var/lib/grafana'
-#      - ./grafana/provisioning:/etc/grafana/provisioning
-    ports:
-      - '3000:3000'
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_USERS_ALLOW_SIGN_UP=false
-#    restart: unless-stopped
-#    expose:
-#      - '3000'
-#    networks:
-#      - monitor-net
-#    labels:
-#      org.label-schema.group: "monitoring"
+#  grafana:
+##    image: grafana/grafana:6.7.2
+#    image: grafana/grafana:latest
+#    container_name: grafana
+#    volumes:
+#      - 'grafana_data:/var/lib/grafana'
+##      - ./grafana/provisioning:/etc/grafana/provisioning
+#    ports:
+#      - '3000:3000'
+#    environment:
+#      - GF_SECURITY_ADMIN_USER=admin
+#      - GF_SECURITY_ADMIN_PASSWORD=admin
+#      - GF_USERS_ALLOW_SIGN_UP=false
+##    restart: unless-stopped
+##    expose:
+##      - '3000'
+##    networks:
+##      - monitor-net
+##    labels:
+##      org.label-schema.group: "monitoring"
 
   #  kafka-init-topics:
 #    image: confluentinc/cp-kafka:7.4.4
@@ -136,17 +135,17 @@ services:
     ports:
       - '6540:5432'
 
-  producer:
-    build: ./producer
-    container_name: producer
-#      context: .
-#      dockerfile: producer/Dockerfile
-    ports:
-      - '9090:9090'
-    depends_on:
-      - kafka
-#    links:
-#      - kafka-ui
+#  producer:
+#    build: ./producer
+#    container_name: producer
+##      context: .
+##      dockerfile: producer/Dockerfile
+#    ports:
+#      - '9090:9090'
+#    depends_on:
+#      - kafka
+##    links:
+##      - kafka-ui
 
   consumer:
     build: ./consumer
@@ -154,7 +153,7 @@ services:
     ports:
       - '9091:9091'
     depends_on:
-      - producer
+#      - producer
       - postgres
     environment:
       - 'DB_NAME=person_db'
