@@ -135,17 +135,17 @@ services:
     ports:
       - '6540:5432'
 
-#  producer:
-#    build: ./producer
-#    container_name: producer
-##      context: .
-##      dockerfile: producer/Dockerfile
-#    ports:
-#      - '9090:9090'
-#    depends_on:
-#      - kafka
-##    links:
-##      - kafka-ui
+  producer:
+    build: ./producer
+    container_name: producer
+#      context: .
+#      dockerfile: producer/Dockerfile
+    ports:
+      - '9090:9090'
+    depends_on:
+      - kafka
+#    links:
+#      - kafka-ui
 
   consumer:
     build: ./consumer
