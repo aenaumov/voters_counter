@@ -23,7 +23,7 @@ public class VotesController {
         try {
             votesService.addVotes(votes);
             log.info("Vote's been added");
-            return new ResponseEntity<>("Your vote has been added", HttpStatus.ACCEPTED);
+            return new ResponseEntity<>("Your vote has been added", HttpStatus.OK);
         } catch (Exception ex){
             log.warn("Something gone wrong: ", ex);
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
