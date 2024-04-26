@@ -4,8 +4,9 @@ import com.example.voters_counter.dto.Votes;
 import com.example.voters_counter.entities.Person;
 import com.example.voters_counter.repository.UserReactiveRepository;
 import com.example.voters_counter.service.PersonService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +16,11 @@ import java.util.Objects;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class PersonServiceImpl implements PersonService {
 
-    @Autowired
     private UserReactiveRepository userReactiveRepository;
-
+    private final KafkaTemplate<String, Votes> template;
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public Mono<Person> addVotes(Votes votes) {
@@ -34,6 +35,10 @@ public class PersonServiceImpl implements PersonService {
                     person.setVotes(person.getVotes() + vote);
                     log.info("Try add {} votes to {}", vote, family);
                     return userReactiveRepository.save(person);
-                }) ;
+                })
+                .doOnError(RuntimeException.class,
+                        (ex) -> template.send("topic_not_exist_votes", "not_exist_vote", votes))
+                ;
     }
+
 }
