@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
-import java.util.Objects;
-
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -29,7 +27,6 @@ public class PersonServiceImpl implements PersonService {
         final Long vote = votes.getVotes();
 
         return userReactiveRepository.findPersonByFamily(family)
-                .filter(Objects::nonNull)
                 .switchIfEmpty(Mono.error(new RuntimeException("Person '" + family + "' doesn't exist")))
                 .flatMap(person -> {
                     person.setVotes(person.getVotes() + vote);
